@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI工具导航站 | 七六导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 15px 25px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .search-input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            background: transparent;
+            color: #333;
+        }
+
+        .search-input::placeholder {
+            color: #666;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .category {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-icon {
+            font-size: 1.8rem;
+        }
+
+        .links {
+            display: grid;
+            gap: 12px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #2d3748;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .link-item:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .link-title {
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .link-desc {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .category {
+                padding: 20px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 AI工具导航站</h1>
+            <p>精选优质AI工具，提升工作效率</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="🔍 搜索您需要的AI工具..." id="searchInput">
+        </div>
+
+        <div class="categories" id="categoriesContainer">
+            <!-- AI对话工具 -->
+            <div class="category" data-category="ai-chat">
+                <div class="category-title">
+                    <span class="category-icon">💬</span>
+                    AI对话工具
+                </div>
+                <div class="links">
+                    <a href="https://chat.openai.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">ChatGPT</div>
+                            <div class="link-desc">OpenAI开发的强大对话AI</div>
+                        </div>
+                    </a>
+                    <a href="https://claude.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Claude</div>
+                            <div class="link-desc">Anthropic开发的AI助手</div>
+                        </div>
+                    </a>
+                    <a href="https://poe.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Poe</div>
+                            <div class="link-desc">多种AI模型聚合平台</div>
+                        </div>
+                    </a>
+                    <a href="https://character.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Character.ai</div>
+                            <div class="link-desc">角色扮演AI对话平台</div>
+                        </div>
+                    </a>
+                    <a href="https://aistudio.google.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Google AI Studio</div>
+                            <div class="link-desc">Google的AI开发平台</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 视频生成与编辑 -->
+            <div class="category" data-category="video">
+                <div class="category-title">
+                    <span class="category-icon">🎬</span>
+                    视频生成与编辑
+                </div>
+                <div class="links">
+                    <a href="https://d-id.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">D-ID</div>
+                            <div class="link-desc">AI视频生成平台</div>
+                        </div>
+                    </a>
+                    <a href="https://lumen5.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Lumen5</div>
+                            <div class="link-desc">在线视频制作工具</div>
+                        </div>
+                    </a>
+                    <a href="https://vidyo.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Vidyo.ai</div>
+                            <div class="link-desc">基于AI的内容再利用</div>
+                        </div>
+                    </a>
+                    <a href="https://fliki.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Fliki</div>
+                            <div class="link-desc">文本转视频AI工具</div>
+                        </div>
+                    </a>
+                    <a href="https://runwayml.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Runway</div>
+                            <div class="link-desc">创意AI视频工具</div>
+                        </div>
+                    </a>
+                    <a href="https://deepswap.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Deepswap</div>
+                            <div class="link-desc">AI换脸应用</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 文本生成工具 -->
+            <div class="category" data-category="text">
+                <div class="category-title">
+                    <span class="category-icon">✍️</span>
+                    文本生成工具
+                </div>
+                <div class="links">
+                    <a href="https://copy.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Copy.ai</div>
+                            <div class="link-desc">AI营销文案生成</div>
+                        </div>
+                    </a>
+                    <a href="https://writesonic.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Writesonic</div>
+                            <div class="link-desc">AI写作和文案工具</div>
+                        </div>
+                    </a>
+                    <a href="https://jasper.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Jasper Chat</div>
+                            <div class="link-desc">面向内容创作者的AI</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 图像生成工具 -->
+            <div class="category" data-category="image">
+                <div class="category-title">
+                    <span class="category-icon">🎨</span>
+                    图像生成工具
+                </div>
+                <div class="links">
+                    <a href="https://openai.com/dall-e-2" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">DALL·E 2</div>
+                            <div class="link-desc">OpenAI图像生成模型</div>
+                        </div>
+                    </a>
+                    <a href="https://stablediffusionweb.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Stable Diffusion</div>
+                            <div class="link-desc">开源图像生成模型</div>
+                        </div>
+                    </a>
+                    <a href="https://midjourney.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Midjourney</div>
+                            <div class="link-desc">高质量AI艺术生成</div>
+                        </div>
+                    </a>
+                    <a href="https://creator.nightcafe.studio" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">NightCafe</div>
+                            <div class="link-desc">AI艺术生成器</div>
+                        </div>
+                    </a>
+                    <a href="https://starryai.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">StarryAI</div>
+                            <div class="link-desc">AI艺术制作应用</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 语音生成工具 -->
+            <div class="category" data-category="audio">
+                <div class="category-title">
+                    <span class="category-icon">🎵</span>
+                    语音生成工具
+                </div>
+                <div class="links">
+                    <a href="https://soundraw.io" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">SOUNDRAW</div>
+                            <div class="link-desc">AI音乐生成器</div>
+                        </div>
+                    </a>
+                    <a href="https://elevenlabs.io" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">ElevenLabs</div>
+                            <div class="link-desc">AI语音生成和克隆</div>
+                        </div>
+                    </a>
+                    <a href="https://ampermusic.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Amper Music</div>
+                            <div class="link-desc">AI音乐创作平台</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 开发与技术 -->
+            <div class="category" data-category="dev">
+                <div class="category-title">
+                    <span class="category-icon">💻</span>
+                    开发与技术
+                </div>
+                <div class="links">
+                    <a href="https://github.com/features/copilot" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">GitHub Copilot</div>
+                            <div class="link-desc">AI代码助手</div>
+                        </div>
+                    </a>
+                    <a href="https://devv.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Devv AI</div>
+                            <div class="link-desc">开发者AI助手</div>
+                        </div>
+                    </a>
+                    <a href="https://firebase.google.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Firebase</div>
+                            <div class="link-desc">Google云开发平台</div>
+                        </div>
+                    </a>
+                    <a href="https://greasyfork.org" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Greasy Fork</div>
+                            <div class="link-desc">用户脚本分享平台</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 实用工具 -->
+            <div class="category" data-category="tools">
+                <div class="category-title">
+                    <span class="category-icon">🛠️</span>
+                    实用工具
+                </div>
+                <div class="links">
+                    <a href="https://chrome.google.com/webstore" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">Chrome应用商店</div>
+                            <div class="link-desc">浏览器扩展程序</div>
+                        </div>
+                    </a>
+                    <a href="https://translate.google.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">谷歌翻译</div>
+                            <div class="link-desc">在线翻译工具</div>
+                        </div>
+                    </a>
+                    <a href="https://www.whatismyipaddress.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">IP地址查询</div>
+                            <div class="link-desc">查看公网IP地址</div>
+                        </div>
+                    </a>
+                    <a href="https://sms-activate.org" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">SMS-Activate</div>
+                            <div class="link-desc">虚拟号码接收短信</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 营销与推广 -->
+            <div class="category" data-category="marketing">
+                <div class="category-title">
+                    <span class="category-icon">📈</span>
+                    营销与推广
+                </div>
+                <div class="links">
+                    <a href="https://adcreative.ai" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">AdCreative.ai</div>
+                            <div class="link-desc">AI广告创意生成</div>
+                        </div>
+                    </a>
+                    <a href="https://sleekflow.io" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">SleekFlow</div>
+                            <div class="link-desc">WhatsApp营销平台</div>
+                        </div>
+                    </a>
+                    <a href="https://wordpress.com" class="link-item" target="_blank">
+                        <div>
+                            <div class="link-title">WordPress</div>
+                            <div class="link-desc">网站建设平台</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 AI工具导航站 | 收集整理优质AI工具，助力效率提升</p>
+        </div>
+    </div>
+
+    <script>
+        // 搜索功能
+        const searchInput = document.getElementById('searchInput');
+        const categories = document.querySelectorAll('.category');
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            categories.forEach(category => {
+                const links = category.querySelectorAll('.link-item');
+                let hasVisibleLinks = false;
+                
+                links.forEach(link => {
+                    const title = link.querySelector('.link-title').textContent.toLowerCase();
+                    const desc = link.querySelector('.link-desc').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                        link.style.display = 'flex';
+                        hasVisibleLinks = true;
+                    } else {
+                        link.style.display = 'none';
+                    }
+                });
+                
+                // 如果搜索词为空或者该分类有匹配的链接，显示分类
+                if (searchTerm === '' || hasVisibleLinks) {
+                    category.style.display = 'block';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        });
+
+        // 添加键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>
